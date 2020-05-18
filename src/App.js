@@ -1,5 +1,11 @@
 import React from "react";
+import "./app.css";
+import ShipList from "./ShipList";
 
 export default function App() {
-    return <div>App</div>;
+    return (
+        <div>
+            <ShipList />
+        </div>
+    );
 }
