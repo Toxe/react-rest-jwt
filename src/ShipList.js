@@ -16,8 +16,6 @@ export default function ShipList() {
             .catch((error) => setRequestError(<RequestError error={error} />));
     }, []);
 
-    console.log(ships);
-
     return (
         <div>
             <div className="Container">
