@@ -11,9 +11,10 @@ h2 {
 .Container {
     background-color: #eee;
     padding: 5px;
+    margin-bottom: 10px;
 }
 
-.Ship {
+.Ship, .User {
     background-color: #ddd;
 }
 
