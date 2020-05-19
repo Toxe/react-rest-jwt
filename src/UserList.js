@@ -27,9 +27,13 @@ export default function UserList() {
         <div>
             <div className="Container">
                 <h1>Users</h1>
-                {users.map((user) => (
-                    <UserListItem key={user.id} user={user} />
-                ))}
+                <table className="UserTable">
+                    <tbody>
+                        {users.map((user) => (
+                            <UserListItem key={user.id} user={user} />
+                        ))}
+                    </tbody>
+                </table>
                 <AddUserForm userCreatedCallback={userCreatedCallback} />
                 {requestError}
             </div>

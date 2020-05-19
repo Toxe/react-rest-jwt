@@ -2,8 +2,9 @@ import React from "react";
 
 export default function UserListItem({ user }) {
     return (
-        <div className="User">
-            #{user.id} Name: <strong>{user.name}</strong>
-        </div>
+        <tr>
+            <td>#{user.id}</td>
+            <td>Name: <strong>{user.name}</strong></td>
+        </tr>
     );
 }
