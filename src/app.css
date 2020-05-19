@@ -28,3 +28,8 @@ h2 {
     background-color: red;
     padding: 5px;
 }
+
+.AddUserForm {
+    background-color: lightgreen;
+    padding: 5px;
+}
