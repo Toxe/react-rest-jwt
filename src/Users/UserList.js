@@ -20,8 +20,14 @@ export default function UserList() {
         refreshUsers();
     }, []);
 
-    const userCreatedCallback = (user) => {
-        refreshUsers();
+    const handleCreateUser = (user) => {
+        axios
+            .post("/api/users", user)
+            .then((res) => {
+                setRequestError(null);
+                refreshUsers();
+            })
+            .catch((error) => setRequestError(<RequestError error={error} handleClose={() => setRequestError(null)} />));
     };
 
     const handleDeleteUser = (user_id) => {
@@ -45,7 +51,7 @@ export default function UserList() {
                         ))}
                     </tbody>
                 </table>
-                <AddUserForm userCreatedCallback={userCreatedCallback} />
+                <AddUserForm handleCreateUser={handleCreateUser} />
                 {requestError}
             </div>
         </div>

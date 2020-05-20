@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import RequestError from "../RequestError";
 
-export default function AddUserForm({ userCreatedCallback }) {
+export default function AddUserForm({ handleCreateUser }) {
     const [visible, setVisible] = useState(false);
     const [user, setUser] = useState({ name: "", password: "" });
-    const [requestError, setRequestError] = useState(null);
 
     const toggleVisibility = () => {
         setVisible(!visible);
-        setRequestError(null);
     };
 
     const onUserChange = (e) => {
@@ -18,18 +14,9 @@ export default function AddUserForm({ userCreatedCallback }) {
 
     useEffect(() => {
         // reset user input values when the the input fields hide
-        if (!visible) setUser({ name: "", password: "" });
+        if (!visible)
+            setUser({ name: "", password: "" });
     }, [visible]);
-
-    const handleCreateUser = (user) => {
-        axios
-            .post("/api/users", user)
-            .then((res) => {
-                setRequestError(null);
-                userCreatedCallback(user);
-            })
-            .catch((error) => setRequestError(<RequestError error={error} handleClose={() => setRequestError(null)} />));
-    };
 
     return (
         <div className="AddUserForm">
@@ -46,7 +33,6 @@ export default function AddUserForm({ userCreatedCallback }) {
                     </div>
                 </div>
             )}
-            {requestError}
         </div>
     );
 }
