@@ -4,6 +4,7 @@ import "./UserList.css";
 import UserListItem from "./UserListItem";
 import AddUserForm from "./AddUserForm";
 import RequestError from "../RequestError";
+import RefreshListButton from "../RefreshListButton";
 
 export default function UserList() {
     const [users, setUsers] = useState([]);
@@ -51,6 +52,7 @@ export default function UserList() {
                         ))}
                     </tbody>
                 </table>
+                <RefreshListButton refresh={refreshUsers}/>
                 <AddUserForm handleCreateUser={handleCreateUser} />
                 {requestError}
             </div>
