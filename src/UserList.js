@@ -24,7 +24,6 @@ export default function UserList() {
     };
 
     const handleDeleteUser = (user_id) => {
-        console.log("handleDeleteUser", user_id);
         axios
             .delete(`/api/users/${user_id}`)
             .then((res) => {
