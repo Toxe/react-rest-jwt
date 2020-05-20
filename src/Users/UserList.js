@@ -24,8 +24,8 @@ export default function UserList() {
         axios
             .post("/api/users", user)
             .then((res) => {
+                setUsers([...users, res.data]);
                 setRequestError(null);
-                refreshUsers();
             })
             .catch((error) => setRequestError(<RequestError error={error} handleClose={() => setRequestError(null)} />));
     };
@@ -34,8 +34,8 @@ export default function UserList() {
         axios
             .delete(`/api/users/${user_id}`)
             .then((res) => {
+                setUsers(users.filter((u) => u.id !== user_id));
                 setRequestError(null);
-                refreshUsers();
             })
             .catch((error) => setRequestError(<RequestError error={error} handleClose={() => setRequestError(null)} />));
     };
