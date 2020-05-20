@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import RequestError from "./RequestError";
+import RequestError from "../RequestError";
 
 export default function AddUserForm({ userCreatedCallback }) {
     const [visible, setVisible] = useState(false);

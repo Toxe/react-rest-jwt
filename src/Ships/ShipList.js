@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ShipListItem from "./ShipListItem";
 import ShipDetails from "./ShipDetails";
-import RequestError from "./RequestError";
+import RequestError from "../RequestError";
 
 export default function ShipList() {
     const [ships, setShips] = useState([]);

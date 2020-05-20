@@ -1,7 +1,7 @@
 import React from "react";
 import "./app.css";
-import UserList from "./UserList";
-import ShipList from "./ShipList";
+import UserList from "./Users/UserList";
+import ShipList from "./Ships/ShipList";
 
 export default function App() {
     return (

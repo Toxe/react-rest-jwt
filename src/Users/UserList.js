@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import UserListItem from "./UserListItem";
 import AddUserForm from "./AddUserForm";
-import RequestError from "./RequestError";
+import RequestError from "../RequestError";
 
 export default function UserList() {
     const [users, setUsers] = useState([]);

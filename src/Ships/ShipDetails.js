@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import RequestError from "./RequestError";
+import RequestError from "../RequestError";
 
 export default function ShipDetails(props) {
     const [ship, setShip] = useState(null);
