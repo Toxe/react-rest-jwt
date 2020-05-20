@@ -21,9 +21,22 @@ export default function ShipList() {
         <div>
             <div className="Container">
                 <h1>Ships</h1>
-                {ships.map((ship) => (
-                    <ShipListItem key={ship.id} ship={ship} changeShipDetailsID={() => setShipDetailsID(ship.id)} />
-                ))}
+                <table className="ShipTable">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Affiliation</th>
+                            <th>Category</th>
+                            <th>Ship Class</th>
+                            <th>Model</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {ships.map((ship) => (
+                            <ShipListItem key={ship.id} ship={ship} changeShipDetailsID={() => setShipDetailsID(ship.id)} />
+                        ))}
+                    </tbody>
+                </table>
                 {requestError || <ShipDetails shipDetailsID={shipDetailsID} />}
             </div>
         </div>
