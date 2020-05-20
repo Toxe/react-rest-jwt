@@ -4,9 +4,15 @@ table.UserTable {
 
 table.UserTable td {
     padding: 0px;
+    vertical-align: top;
 }
 
 .AddUserForm {
     background-color: lightgreen;
+    padding: 5px;
+}
+
+.EditUserForm {
+    background-color: lightskyblue;
     padding: 5px;
 }

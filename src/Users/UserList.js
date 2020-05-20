@@ -31,6 +31,17 @@ export default function UserList() {
             .catch((error) => setRequestError(<RequestError error={error} handleClose={() => setRequestError(null)} />));
     };
 
+    const handleEditUser = (user) => {
+        console.log("handleEditUser", user);
+        axios
+            .put(`/api/users/${user.id}`, user)
+            .then((res) => {
+                setUsers(users.filter((u) => (u.id === user.id ? res.data : u)));
+                setRequestError(null);
+            })
+            .catch((error) => setRequestError(<RequestError error={error} handleClose={() => setRequestError(null)} />));
+    };
+
     const handleDeleteUser = (user_id) => {
         axios
             .delete(`/api/users/${user_id}`)
@@ -48,7 +59,7 @@ export default function UserList() {
                 <table className="UserTable">
                     <tbody>
                         {users.map((user) => (
-                            <UserListItem key={user.id} user={user} handleDeleteUser={handleDeleteUser} />
+                            <UserListItem key={user.id} user={user} handleDeleteUser={handleDeleteUser} handleEditUser={handleEditUser} />
                         ))}
                     </tbody>
                 </table>
