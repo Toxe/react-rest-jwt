@@ -59,7 +59,7 @@ export default function UserList() {
                 <table className="UserTable">
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th></th>
                             <th>Username</th>
                             <th></th>
                         </tr>
