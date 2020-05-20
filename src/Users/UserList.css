@@ -1,0 +1,12 @@
+table.UserTable {
+    background-color: #ddd;
+}
+
+table.UserTable td {
+    padding: 0px;
+}
+
+.AddUserForm {
+    background-color: lightgreen;
+    padding: 5px;
+}

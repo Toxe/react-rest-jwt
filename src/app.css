@@ -14,30 +14,8 @@ h2 {
     margin-bottom: 10px;
 }
 
-table.UserTable {
-    background-color: #ddd;
-}
-
-table.UserTable td {
-    padding: 0px;
-}
-
-.Ship {
-    background-color: #ddd;
-}
-
-.ShipDetails {
-    background-color: #ccc;
-    padding: 5px;
-}
-
 .RequestError {
     color: white;
     background-color: red;
-    padding: 5px;
-}
-
-.AddUserForm {
-    background-color: lightgreen;
     padding: 5px;
 }

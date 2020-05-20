@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "./ShipList.css";
 import ShipListItem from "./ShipListItem";
 import ShipDetails from "./ShipDetails";
 import RequestError from "../RequestError";
