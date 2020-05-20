@@ -57,6 +57,13 @@ export default function UserList() {
             <div className="Container">
                 <h1>Users</h1>
                 <table className="UserTable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Username</th>
+                            <th></th>
+                        </tr>
+                    </thead>
                     <tbody>
                         {users.map((user) => (
                             <UserListItem key={user.id} user={user} handleDeleteUser={handleDeleteUser} handleEditUser={handleEditUser} />
