@@ -28,7 +28,7 @@ export default function AddUserForm({ userCreatedCallback }) {
                 setRequestError(null);
                 userCreatedCallback(user);
             })
-            .catch((error) => setRequestError(<RequestError error={error} />));
+            .catch((error) => setRequestError(<RequestError error={error} handleClose={() => setRequestError(null)} />));
     };
 
     return (

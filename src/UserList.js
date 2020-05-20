@@ -12,7 +12,7 @@ export default function UserList() {
         axios
             .get("/api/users")
             .then((res) => setUsers(res.data))
-            .catch((error) => setRequestError(<RequestError error={error} />));
+            .catch((error) => setRequestError(<RequestError error={error} handleClose={() => setRequestError(null)} />));
     };
 
     useEffect(() => {
@@ -31,7 +31,7 @@ export default function UserList() {
                 setRequestError(null);
                 refreshUsers();
             })
-            .catch((error) => setRequestError(<RequestError error={error} />));
+            .catch((error) => setRequestError(<RequestError error={error} handleClose={() => setRequestError(null)} />));
     };
 
     return (

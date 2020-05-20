@@ -19,7 +19,7 @@ export default function ShipDetails(props) {
             axios
                 .get(`/api/ships/${shipDetailsID}`)
                 .then((res) => setShip(res.data))
-                .catch((error) => setRequestError(<RequestError error={error} />));
+                .catch((error) => setRequestError(<RequestError error={error} handleClose={() => setRequestError(null)} />));
         }
     }, [shipDetailsID]);
 

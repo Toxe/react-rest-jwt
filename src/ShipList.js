@@ -13,7 +13,7 @@ export default function ShipList() {
         axios
             .get("/api/ships")
             .then((res) => setShips(res.data))
-            .catch((error) => setRequestError(<RequestError error={error} />));
+            .catch((error) => setRequestError(<RequestError error={error} handleClose={() => setRequestError(null)} />));
     }, []);
 
     return (
