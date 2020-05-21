@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-export default function AddShipForm({ handleCreateShip }) {
+export default function EditShipForm({ oldShipValues, handleEditShip }) {
     const [visible, setVisible] = useState(false);
-    const [ship, setShip] = useState({ affiliation: "", category: "", crew: "", length: "", manufacturer: "", model: "", roles: "", ship_class: "" });
+    const [ship, setShip] = useState(oldShipValues);
 
     const toggleVisibility = () => {
         setVisible(!visible);
@@ -15,14 +15,14 @@ export default function AddShipForm({ handleCreateShip }) {
     useEffect(() => {
         // reset ship input values when the the input fields hide
         if (!visible)
-            setShip({ affiliation: "", category: "", crew: "", length: "", manufacturer: "", model: "", roles: "", ship_class: "" });
-    }, [visible]);
+            setShip(oldShipValues);
+    }, [visible, oldShipValues]);
 
     return (
-        <div className="AddShipForm">
-            <button onClick={toggleVisibility}>{visible ? "Hide" : "Add Ship"}</button>
+        <>
+            <button onClick={toggleVisibility}>{visible ? "Hide" : "Edit"}</button>
             {visible && (
-                <div>
+                <div className="EditShipForm">
                     <table>
                         <tbody>
                             <tr>
@@ -63,11 +63,11 @@ export default function AddShipForm({ handleCreateShip }) {
                         </tbody>
                     </table>
                     <div>
-                        <button disabled={Object.values(ship).some((e) => e === "")} onClick={() => handleCreateShip(ship)}>Create new Ship</button>
+                        <button disabled={Object.values(ship).some((e) => e === "")} onClick={() => handleEditShip(ship)}>Save Changes</button>
                         <button onClick={toggleVisibility}>Cancel</button>
                     </div>
                 </div>
             )}
-        </div>
+        </>
     );
 }

@@ -1,7 +1,8 @@
 import React from "react";
 import DeleteListItemButton from "../DeleteListItemButton";
+import EditShipForm from "./EditShipForm";
 
-export default function ShipListItem({ ship, changeShipDetailsID, handleDeleteShip }) {
+export default function ShipListItem({ ship, changeShipDetailsID, handleDeleteShip, handleEditShip }) {
     return (
         <tr>
             <td><button onClick={changeShipDetailsID}>#{ship.id}</button></td>
@@ -11,6 +12,7 @@ export default function ShipListItem({ ship, changeShipDetailsID, handleDeleteSh
             <td><strong>{ship.model}</strong></td>
             <td>
                 <DeleteListItemButton id={ship.id} handleDelete={handleDeleteShip} />
+                <EditShipForm oldShipValues={ship} handleEditShip={handleEditShip} />
             </td>
         </tr>
     );

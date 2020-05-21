@@ -21,3 +21,8 @@ table.ShipTable th {
     background-color: lightgreen;
     padding: 5px;
 }
+
+.EditShipForm {
+    background-color: lightskyblue;
+    padding: 5px;
+}

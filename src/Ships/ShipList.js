@@ -33,6 +33,17 @@ export default function ShipList() {
             .catch((error) => setRequestError(<RequestError error={error} handleClose={() => setRequestError(null)} />));
     };
 
+    const handleEditShip = (ship) => {
+        console.log("handleEditShip", ship);
+        axios
+            .put(`/api/ships/${ship.id}`, ship)
+            .then((res) => {
+                setShips(ships.filter((u) => (u.id === ship.id ? res.data : u)));
+                setRequestError(null);
+            })
+            .catch((error) => setRequestError(<RequestError error={error} handleClose={() => setRequestError(null)} />));
+    };
+
     const handleDeleteShip = (ship_id) => {
         axios
             .delete(`/api/ships/${ship_id}`)
@@ -60,7 +71,7 @@ export default function ShipList() {
                     </thead>
                     <tbody>
                         {ships.map((ship) => (
-                            <ShipListItem key={ship.id} ship={ship} changeShipDetailsID={() => setShipDetailsID(ship.id)} handleDeleteShip={handleDeleteShip} />
+                            <ShipListItem key={ship.id} ship={ship} changeShipDetailsID={() => setShipDetailsID(ship.id)} handleDeleteShip={handleDeleteShip} handleEditShip={handleEditShip} />
                         ))}
                     </tbody>
                 </table>
