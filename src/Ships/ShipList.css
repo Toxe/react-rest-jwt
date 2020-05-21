@@ -16,3 +16,8 @@ table.ShipTable th {
     background-color: #ccc;
     padding: 5px;
 }
+
+.AddShipForm {
+    background-color: lightgreen;
+    padding: 5px;
+}

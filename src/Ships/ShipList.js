@@ -3,6 +3,7 @@ import axios from "axios";
 import "./ShipList.css";
 import ShipListItem from "./ShipListItem";
 import ShipDetails from "./ShipDetails";
+import AddShipForm from "./AddShipForm";
 import RequestError from "../RequestError";
 import RefreshListButton from "../RefreshListButton";
 
@@ -21,6 +22,16 @@ export default function ShipList() {
     useEffect(() => {
         refreshShips();
     }, []);
+
+    const handleCreateShip = (ship) => {
+        axios
+            .post("/api/ships", ship)
+            .then((res) => {
+                setShips([...ships, res.data]);
+                setRequestError(null);
+            })
+            .catch((error) => setRequestError(<RequestError error={error} handleClose={() => setRequestError(null)} />));
+    };
 
     return (
         <div>
@@ -43,6 +54,7 @@ export default function ShipList() {
                     </tbody>
                 </table>
                 <RefreshListButton refresh={refreshShips}/>
+                <AddShipForm handleCreateShip={handleCreateShip} />
                 {requestError || <ShipDetails shipDetailsID={shipDetailsID} />}
             </div>
         </div>
