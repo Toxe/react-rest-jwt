@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 export default function LoginSection({ handleLogin }) {
-    const [credentials, setCredentials] = useState({ username: "guest", password: "guest" });
+    const [credentials, setCredentials] = useState({ username: "", password: "" });
 
     const onChange = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
