@@ -1,0 +1,19 @@
+.AuthHeader {
+    padding: 5px;
+    margin-bottom: 20px;
+}
+
+.AuthHeader.LoggedIn {
+    background-color: rgb(154, 255, 154);
+}
+
+.AuthHeader.NotLoggedIn {
+    background-color: rgb(253, 125, 125);
+}
+
+.AuthInfo {
+    padding: 5px;
+    font-size: smaller;
+    white-space: nowrap;
+    background-color: rgb(103, 252, 103);
+}
