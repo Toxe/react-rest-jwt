@@ -1,11 +1,14 @@
 import React from "react";
+import TokenInfo from "./TokenInfo";
 
 export default function AuthInfo({ auth }) {
     return (
         <div className="AuthInfo">
-            <div><strong>access_token:</strong> {auth.access_token}</div>
-            <div><strong>refresh_token:</strong> {auth.refresh_token}</div>
-            <div><strong>identity:</strong> {auth.userId}</div>
+            <div>
+                <strong>identity:</strong> {auth.userId}
+            </div>
+            <TokenInfo token={auth.access_token} />
+            <TokenInfo token={auth.refresh_token} />
         </div>
     );
 }
