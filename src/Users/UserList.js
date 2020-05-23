@@ -32,7 +32,6 @@ export default function UserList() {
     };
 
     const handleEditUser = (user) => {
-        console.log("handleEditUser", user);
         axios
             .put(`/api/users/${user.id}`, user)
             .then((res) => {

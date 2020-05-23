@@ -34,7 +34,6 @@ export default function ShipList() {
     };
 
     const handleEditShip = (ship) => {
-        console.log("handleEditShip", ship);
         axios
             .put(`/api/ships/${ship.id}`, ship)
             .then((res) => {
