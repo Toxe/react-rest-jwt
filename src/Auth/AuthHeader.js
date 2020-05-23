@@ -56,7 +56,7 @@ export default function AuthHeader() {
 
     return (
         <div className={auth ? "AuthHeader LoggedIn" : "AuthHeader NotLoggedIn"}>
-            {auth ? <LogoutSection handleLogout={handleLogout} /> : <LoginSection handleLogin={handleLogin} />}
+            {auth ? <LogoutSection userId={auth.userId} handleLogout={handleLogout} /> : <LoginSection handleLogin={handleLogin} />}
             {auth && <AuthInfo auth={auth} />}
             {requestError}
         </div>
