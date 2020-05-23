@@ -12,6 +12,11 @@ export default function AddUserForm({ handleCreateUser }) {
         setUser({ ...user, [e.target.name]: e.target.value });
     };
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        handleCreateUser(user);
+    };
+
     useEffect(() => {
         // reset user input values when the the input fields hide
         if (!visible)
@@ -22,16 +27,18 @@ export default function AddUserForm({ handleCreateUser }) {
         <div className="AddUserForm">
             <button onClick={toggleVisibility}>{visible ? "Hide" : "Add User"}</button>
             {visible && (
-                <div>
+                <form onSubmit={handleSubmit}>
                     <div>
-                        Name: <input type="text" size="20" name="name" value={user.name} onChange={onUserChange} />{" "}
-                        Password: <input type="password" size="20" name="password" value={user.password} onChange={onUserChange} />
+                        <div>
+                            Name: <input type="text" size="20" name="name" value={user.name} onChange={onUserChange} />{" "}
+                            Password: <input type="password" size="20" name="password" value={user.password} onChange={onUserChange} />
+                        </div>
+                        <div>
+                            <button type="submit" disabled={user.name === "" || user.password === ""}>Create new User</button>
+                            <button type="button" onClick={toggleVisibility}>Cancel</button>
+                        </div>
                     </div>
-                    <div>
-                        <button disabled={user.name === "" || user.password === ""} onClick={() => handleCreateUser(user)}>Create new User</button>
-                        <button onClick={toggleVisibility}>Cancel</button>
-                    </div>
-                </div>
+                </form>
             )}
         </div>
     );
