@@ -54,10 +54,23 @@ export default function AuthHeader() {
             });
     };
 
+    const handleRefresh = () => {
+        axios
+            .post("/auth/refresh", null, { headers: { Authorization: `Bearer ${auth.refresh_token}` } })
+            .then((res) => {
+                setAuth({ ...auth, access_token: res.data.access_token });
+                setRequestError(null);
+                axios.defaults.headers["Authorization"] = `Bearer ${res.data.access_token}`;
+            })
+            .catch((error) =>
+                setRequestError(<RequestError error={error} handleClose={() => setRequestError(null)} />)
+            );
+    };
+
     return (
         <div className={auth ? "AuthHeader LoggedIn" : "AuthHeader NotLoggedIn"}>
             {auth ? <LogoutSection userId={auth.userId} handleLogout={handleLogout} /> : <LoginSection handleLogin={handleLogin} />}
-            {auth && <AuthInfo auth={auth} />}
+            {auth && <AuthInfo auth={auth} handleRefresh={handleRefresh} />}
             {requestError}
         </div>
     );
