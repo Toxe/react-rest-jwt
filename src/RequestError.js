@@ -9,7 +9,7 @@ export default function RequestError({ error, handleClose }) {
                 {error.response && error.response.data.message && <pre>{JSON.stringify(error.response.data.message, null, "  ")}</pre>}
             </div>
             <div>
-                <button onClick={handleClose}>close</button>
+                <button type="button" onClick={handleClose}>close</button>
             </div>
         </div>
     );

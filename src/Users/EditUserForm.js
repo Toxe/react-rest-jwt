@@ -25,7 +25,7 @@ export default function EditUserForm({ oldUserValues, handleEditUser }) {
 
     return (
         <>
-            <button onClick={toggleVisibility}>{visible ? "Hide" : "Edit"}</button>
+            <button type="button" onClick={toggleVisibility}>{visible ? "Hide" : "Edit"}</button>
             {visible && (
                 <form onSubmit={handleSubmit}>
                     <div className="EditUserForm">

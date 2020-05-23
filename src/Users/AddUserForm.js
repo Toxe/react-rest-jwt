@@ -25,7 +25,7 @@ export default function AddUserForm({ handleCreateUser }) {
 
     return (
         <div className="AddUserForm">
-            <button onClick={toggleVisibility}>{visible ? "Hide" : "Add User"}</button>
+            <button type="button" onClick={toggleVisibility}>{visible ? "Hide" : "Add User"}</button>
             {visible && (
                 <form onSubmit={handleSubmit}>
                     <div>

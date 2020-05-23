@@ -25,7 +25,7 @@ export default function EditShipForm({ oldShipValues, handleEditShip }) {
 
     return (
         <>
-            <button onClick={toggleVisibility}>{visible ? "Hide" : "Edit"}</button>
+            <button type="button" onClick={toggleVisibility}>{visible ? "Hide" : "Edit"}</button>
             {visible && (
                 <form onSubmit={handleSubmit}>
                     <div className="EditShipForm">

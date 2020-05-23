@@ -11,7 +11,7 @@ export default function RefreshListButton({ refresh }) {
 
     return (
         <div className="RefreshListButton">
-            <button onClick={onClick}>Refresh</button> {successVisible && "Done!"}
+            <button type="button" onClick={onClick}>Refresh</button> {successVisible && "Done!"}
         </div>
     );
 }

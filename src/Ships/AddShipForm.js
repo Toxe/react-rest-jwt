@@ -25,7 +25,7 @@ export default function AddShipForm({ handleCreateShip }) {
 
     return (
         <div className="AddShipForm">
-            <button onClick={toggleVisibility}>{visible ? "Hide" : "Add Ship"}</button>
+            <button type="button" onClick={toggleVisibility}>{visible ? "Hide" : "Add Ship"}</button>
             {visible && (
                 <form onSubmit={handleSubmit}>
                     <div>
