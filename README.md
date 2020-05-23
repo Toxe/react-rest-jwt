@@ -4,6 +4,7 @@
 
 - Axios
 - jsonwebtoken
+- date-fns
 
 ## Running REST API Server
 
