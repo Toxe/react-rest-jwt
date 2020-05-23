@@ -5,8 +5,8 @@ export default function RequestError({ error, handleClose }) {
         <div className="RequestError">
             <div>
                 Request error: {error.message}<br />
-                Server response: {error.response.status} {error.response.data.error}
-                {error.response.data.message && (<pre>{JSON.stringify(error.response.data.message, null, "  ")}</pre>)}
+                {error.response && <span>Server response: {error.response.status} {error.response.data.error}</span>}
+                {error.response && error.response.data.message && <pre>{JSON.stringify(error.response.data.message, null, "  ")}</pre>}
             </div>
             <div>
                 <button onClick={handleClose}>close</button>
