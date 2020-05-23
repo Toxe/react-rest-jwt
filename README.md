@@ -3,6 +3,7 @@
 ## Dependencies
 
 - Axios
+- jsonwebtoken
 
 ## Running REST API Server
 
