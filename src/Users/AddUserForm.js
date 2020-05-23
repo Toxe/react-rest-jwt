@@ -34,7 +34,7 @@ export default function AddUserForm({ handleCreateUser }) {
                             Password: <input type="password" size="20" name="password" value={user.password} onChange={onUserChange} />
                         </div>
                         <div>
-                            <button type="submit" disabled={user.name === "" || user.password === ""}>Create new User</button>
+                            <button type="submit" disabled={Object.values(user).some((e) => e === "")}>Create new User</button>
                             <button type="button" onClick={toggleVisibility}>Cancel</button>
                         </div>
                     </div>

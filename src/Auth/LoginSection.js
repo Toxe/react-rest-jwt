@@ -18,7 +18,7 @@ export default function LoginSection({ handleLogin }) {
             <form onSubmit={handleSubmit}>
                 Username: <input type="text" size="20" name="username" value={credentials.username} onChange={onChange} />{" "}
                 Password: <input type="password" size="20" name="password" value={credentials.password} onChange={onChange} />{" "}
-                <button type="submit" disabled={credentials.username === "" || credentials.password === ""}>Login</button>
+                <button type="submit" disabled={Object.values(credentials).some((e) => e === "")}>Login</button>
             </form>
         </div>
     );

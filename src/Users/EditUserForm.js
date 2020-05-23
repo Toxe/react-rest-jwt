@@ -34,7 +34,7 @@ export default function EditUserForm({ oldUserValues, handleEditUser }) {
                             Password: <input type="password" size="20" name="password" value={user.password} onChange={onUserChange} />
                         </div>
                         <div>
-                            <button type="submit" disabled={user.name === "" || user.password === ""}>Save Changes</button>
+                            <button type="submit" disabled={Object.values(user).some((e) => e === "")}>Save Changes</button>
                             <button type="button" onClick={toggleVisibility}>Cancel</button>
                         </div>
                     </div>
