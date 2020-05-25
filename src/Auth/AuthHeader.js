@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import jwt from "jsonwebtoken";
 import "./Auth.css";
@@ -7,10 +7,12 @@ import LogoutSection from "./LogoutSection";
 import AuthInfo from "./AuthInfo";
 import RequestError from "../RequestError";
 import { TokenDecodeError } from "../Errors";
+import { CurrentUserContext } from "../Context/CurrentUser";
 
 export default function AuthHeader() {
     const [auth, setAuth] = useState(null);
     const [requestError, setRequestError] = useState(null);
+    const { setCurrentUserId } = useContext(CurrentUserContext);
 
     const handleLogin = (credentials) => {
         axios
@@ -23,7 +25,8 @@ export default function AuthHeader() {
                     if (access_token_data === null || refresh_token_data === null)
                         throw new TokenDecodeError("Unable to decode token");
 
-                    setAuth({ ...res.data, userId: access_token_data.identity });
+                    setAuth(res.data);
+                    setCurrentUserId(access_token_data.identity);
                     setRequestError(null);
                     axios.defaults.headers["Authorization"] = `Bearer ${res.data.access_token}`;
                 } catch (err) {
@@ -50,6 +53,7 @@ export default function AuthHeader() {
             .finally(() => {
                 // no matter what happens, always "logout" locally
                 setAuth(null);
+                setCurrentUserId(0);
                 delete axios.defaults.headers["Authorization"];
             });
     };
@@ -69,7 +73,7 @@ export default function AuthHeader() {
 
     return (
         <div className={auth ? "AuthHeader LoggedIn" : "AuthHeader NotLoggedIn"}>
-            {auth ? <LogoutSection userId={auth.userId} handleLogout={handleLogout} /> : <LoginSection handleLogin={handleLogin} />}
+            {auth ? <LogoutSection handleLogout={handleLogout} /> : <LoginSection handleLogin={handleLogin} />}
             {auth && <AuthInfo auth={auth} handleRefresh={handleRefresh} />}
             {requestError}
         </div>
