@@ -12,6 +12,10 @@ table.UserTable th {
     text-align: left;
 }
 
+table.UserTable tr.currentUser {
+    background-color: rgb(174, 174, 255);
+}
+
 .AddUserForm {
     background-color: lightgreen;
     padding: 5px;

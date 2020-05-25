@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import DeleteListItemButton from "../DeleteListItemButton";
 import EditUserForm from "./EditUserForm";
+import { CurrentUserContext } from "../Context/CurrentUser";
 
 export default function UserListItem({ user, handleDeleteUser, handleEditUser }) {
+    const { currentUserId } = useContext(CurrentUserContext);
+
     return (
-        <tr>
+        <tr className={user.id === currentUserId ? "currentUser" : null}>
             <td>#{user.id}</td>
             <td><strong>{user.name}</strong></td>
             <td>
