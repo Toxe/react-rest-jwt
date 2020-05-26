@@ -1,8 +1,6 @@
-import React, { useState, useContext } from "react";
-import { CurrentUserContext } from "../Context/CurrentUser";
+import React, { useState } from "react";
 
-export default function Login({ handleLogin, handleLogout }) {
-    const { currentUserId } = useContext(CurrentUserContext);
+export default function LoginComponent({ handleLogin }) {
     const [credentials, setCredentials] = useState({ username: "", password: "" });
 
     const onChange = (e) => {
@@ -14,17 +12,6 @@ export default function Login({ handleLogin, handleLogout }) {
         handleLogin(credentials);
     };
 
-    // show user info and logout button if a user is logged in
-    if (currentUserId > 0) {
-        return (
-            <div className="Auth-LoggedIn">
-                <div>Logged in as user #{currentUserId}.</div>
-                <div><button type="button" onClick={handleLogout}>Logout</button></div>
-            </div>
-        );
-    }
-
-    // no user logged in, show login form
     return (
         <div className="Auth-NotLoggedIn">
             <h1>Login</h1>

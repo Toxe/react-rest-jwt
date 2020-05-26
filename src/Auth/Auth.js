@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import jwt from "jsonwebtoken";
 import "./Auth.css";
-import Login from "./Login";
+import Login from "./Login/Login";
 import AuthInfo from "./AuthInfo";
 import RequestError from "../RequestError";
 import { TokenDecodeError } from "../Errors";
