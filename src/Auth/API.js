@@ -29,6 +29,9 @@ export async function login(credentials) {
 }
 
 export async function logout() {
+    // remove interceptor first to not resend logout requests with expired access tokens
+    removeResponseInterceptor();
+
     // prepare logout calls
     const logout1 = axios.delete("/auth/logout");
     const logout2 = axios.delete("/auth/logout2", {
@@ -40,9 +43,13 @@ export async function logout() {
     localStorage.removeItem("refresh_token");
     delete axios.defaults.headers["Authorization"];
 
-    removeResponseInterceptor();
-
-    await axios.all([logout1, logout2]);
+    try {
+        await axios.all([logout1, logout2]);
+    } catch (error) {
+        // ignore "401 Token has expired" responses because the access token may already have expired
+        if (!(error.response.status === 401 && error.response.data.error === "Token has expired"))
+            throw error;
+    }
 }
 
 export async function refresh() {
