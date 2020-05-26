@@ -2,14 +2,13 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import jwt from "jsonwebtoken";
 import "./Auth.css";
-import LoginSection from "./LoginSection";
-import LogoutSection from "./LogoutSection";
+import Login from "./Login";
 import AuthInfo from "./AuthInfo";
 import RequestError from "../RequestError";
 import { TokenDecodeError } from "../Errors";
 import { CurrentUserContext } from "../Context/CurrentUser";
 
-export default function AuthHeader() {
+export default function Auth() {
     const [auth, setAuth] = useState(null);
     const [requestError, setRequestError] = useState(null);
     const { setCurrentUserId } = useContext(CurrentUserContext);
@@ -72,10 +71,10 @@ export default function AuthHeader() {
     };
 
     return (
-        <div className={auth ? "AuthHeader LoggedIn" : "AuthHeader NotLoggedIn"}>
-            {auth ? <LogoutSection handleLogout={handleLogout} /> : <LoginSection handleLogin={handleLogin} />}
-            {auth && <AuthInfo auth={auth} handleRefresh={handleRefresh} />}
+        <>
+            <Login handleLogin={handleLogin} handleLogout={handleLogout} />
+            <AuthInfo auth={auth} handleRefresh={handleRefresh} />
             {requestError}
-        </div>
+        </>
     );
 }

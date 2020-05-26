@@ -1,6 +1,6 @@
 import React from "react";
 import "./app.css";
-import AuthHeader from "./Auth/AuthHeader";
+import Auth from "./Auth/Auth";
 import UserList from "./Users/UserList";
 import ShipList from "./Ships/ShipList";
 import CurrentUserContextProvider from "./Context/CurrentUser";
@@ -8,7 +8,7 @@ import CurrentUserContextProvider from "./Context/CurrentUser";
 export default function App() {
     return (
         <CurrentUserContextProvider>
-            <AuthHeader />
+            <Auth />
             <UserList />
             <ShipList />
         </CurrentUserContextProvider>

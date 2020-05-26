@@ -5,6 +5,9 @@ import { CurrentUserContext } from "../Context/CurrentUser";
 export default function AuthInfo({ auth, handleRefresh }) {
     const { currentUserId } = useContext(CurrentUserContext);
 
+    if (auth === null)
+        return null;
+
     return (
         <div className="AuthInfo">
             <div>
