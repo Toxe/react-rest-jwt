@@ -2,10 +2,10 @@ import React, { useContext } from "react";
 import TokenInfo from "./TokenInfo";
 import { CurrentUserContext } from "../Context/CurrentUser";
 
-export default function AuthInfo({ auth, handleRefresh }) {
+export default function AuthInfo({ handleRefresh }) {
     const { currentUserId } = useContext(CurrentUserContext);
 
-    if (auth === null)
+    if (currentUserId === 0)
         return null;
 
     return (
@@ -13,8 +13,8 @@ export default function AuthInfo({ auth, handleRefresh }) {
             <div>
                 <strong>identity:</strong> {currentUserId}
             </div>
-            <TokenInfo token={auth.access_token} />
-            <TokenInfo token={auth.refresh_token} />
+            <TokenInfo tokenName="access_token" />
+            <TokenInfo tokenName="refresh_token" />
             <div>
                 <button type="button" onClick={handleRefresh}>Refresh token</button>
             </div>

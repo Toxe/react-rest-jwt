@@ -9,7 +9,6 @@ import { TokenDecodeError } from "../Errors";
 import { CurrentUserContext } from "../Context/CurrentUser";
 
 export default function Auth() {
-    const [auth, setAuth] = useState(null);
     const [requestError, setRequestError] = useState(null);
     const { setCurrentUserId } = useContext(CurrentUserContext);
 
@@ -24,9 +23,10 @@ export default function Auth() {
                     if (access_token_data === null || refresh_token_data === null)
                         throw new TokenDecodeError("Unable to decode token");
 
-                    setAuth(res.data);
                     setCurrentUserId(access_token_data.identity);
                     setRequestError(null);
+                    localStorage.setItem("access_token", res.data.access_token);
+                    localStorage.setItem("refresh_token", res.data.refresh_token);
                     axios.defaults.headers["Authorization"] = `Bearer ${res.data.access_token}`;
                 } catch (err) {
                     throw new TokenDecodeError("Unable to decode token");
@@ -39,7 +39,7 @@ export default function Auth() {
 
     const handleLogout = () => {
         const logout1 = axios.delete("/auth/logout");
-        const logout2 = axios.delete("/auth/logout2", { headers: { Authorization: `Bearer ${auth.refresh_token}` } });
+        const logout2 = axios.delete("/auth/logout2", { headers: { Authorization: `Bearer ${localStorage.getItem("refresh_token")}` } });
 
         axios
             .all([logout1, logout2])
@@ -51,18 +51,19 @@ export default function Auth() {
             })
             .finally(() => {
                 // no matter what happens, always "logout" locally
-                setAuth(null);
                 setCurrentUserId(0);
+                localStorage.removeItem("access_token");
+                localStorage.removeItem("refresh_token");
                 delete axios.defaults.headers["Authorization"];
             });
     };
 
     const handleRefresh = () => {
         axios
-            .post("/auth/refresh", null, { headers: { Authorization: `Bearer ${auth.refresh_token}` } })
+            .post("/auth/refresh", null, { headers: { Authorization: `Bearer ${localStorage.getItem("refresh_token")}` } })
             .then((res) => {
-                setAuth({ ...auth, access_token: res.data.access_token });
                 setRequestError(null);
+                localStorage.setItem("access_token", res.data.access_token);
                 axios.defaults.headers["Authorization"] = `Bearer ${res.data.access_token}`;
             })
             .catch((error) =>
@@ -73,7 +74,7 @@ export default function Auth() {
     return (
         <>
             <Login handleLogin={handleLogin} handleLogout={handleLogout} />
-            <AuthInfo auth={auth} handleRefresh={handleRefresh} />
+            <AuthInfo handleRefresh={handleRefresh} />
             {requestError}
         </>
     );
