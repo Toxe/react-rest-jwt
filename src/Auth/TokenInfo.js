@@ -39,8 +39,9 @@ export default function TokenInfo({ tokenName }) {
                 <strong>{tokenName}</strong>: {token}
             </div>
             <div>issued: {issued}</div>
-            <div>expires: {expires}</div>
-            {isExpired && <div className="expired">EXPIRED</div>}
+            <div className={isExpired ? "expired" : null}>
+                {isExpired ? "expired" : "expires"}: {expires}
+            </div>
         </div>
     );
 }
