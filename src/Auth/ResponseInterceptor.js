@@ -38,12 +38,13 @@ async function errorResponseInterceptor(error, refresh) {
         origRequest.headers["Authorization"] = `Bearer ${access_token}`;
 
         // resend original request
-        await axios(origRequest);
-
-        isRefreshing = false;
+        const response = await axios(origRequest);
 
         // resend all pending requests
-        return await resendPendingRequests(access_token);
+        isRefreshing = false;
+        await resendPendingRequests(access_token);
+
+        return response;
     }
 
     throw error;
