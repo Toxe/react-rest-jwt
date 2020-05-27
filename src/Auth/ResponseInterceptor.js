@@ -46,7 +46,7 @@ async function errorResponseInterceptor(error, refresh) {
         return await resendPendingRequests(access_token);
     }
 
-    return error;
+    throw error;
 }
 
 async function resendPendingRequests(access_token) {
