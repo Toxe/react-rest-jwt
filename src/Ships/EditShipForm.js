@@ -9,7 +9,8 @@ export default function EditShipForm({ oldShipValues, handleEditShip }) {
     };
 
     const onShipChange = (e) => {
-        setShip({ ...ship, [e.target.name]: e.target.value });
+        const value = e.target.name === "roles" ? e.target.value.split(",") : e.target.value;
+        setShip({ ...ship, [e.target.name]: value });
     };
 
     const handleSubmit = (e) => {
