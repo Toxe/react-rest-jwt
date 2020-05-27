@@ -5,6 +5,9 @@ let isRefreshing = false;
 let pendingRequestsQueue = [];
 
 export function addResponseInterceptor(refresh) {
+    if (installedResponseInterceptor !== null)
+        removeResponseInterceptor();
+
     installedResponseInterceptor = axios.interceptors.response.use(
         (response) => response,
         (error) => errorResponseInterceptor(error, refresh)
