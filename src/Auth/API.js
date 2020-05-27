@@ -3,29 +3,33 @@ import jwt from "jsonwebtoken";
 import { TokenDecodeError } from "../Errors";
 import { addResponseInterceptor, removeResponseInterceptor } from "./ResponseInterceptor";
 
-export async function login(credentials) {
-    const response = await axios.post("/auth/login", credentials);
-
-    let access_token_data;
-    let refresh_token_data;
+export function initAuth(access_token, refresh_token) {
+    let identity = null;
 
     try {
-        access_token_data = jwt.decode(response.data.access_token);
-        refresh_token_data = jwt.decode(response.data.refresh_token);
+        const access_token_data = jwt.decode(access_token);
+        const refresh_token_data = jwt.decode(refresh_token);
 
         if (access_token_data === null || refresh_token_data === null)
             throw new TokenDecodeError("Unable to decode token");
+
+        identity = access_token_data.identity;
     } catch (err) {
         throw new TokenDecodeError("Unable to decode token");
     }
 
-    localStorage.setItem("access_token", response.data.access_token);
-    localStorage.setItem("refresh_token", response.data.refresh_token);
-    axios.defaults.headers["Authorization"] = `Bearer ${response.data.access_token}`;
+    localStorage.setItem("access_token", access_token);
+    localStorage.setItem("refresh_token", refresh_token);
+    axios.defaults.headers["Authorization"] = `Bearer ${access_token}`;
 
     addResponseInterceptor(refresh);
 
-    return access_token_data.identity;
+    return identity;
+}
+
+export async function login(credentials) {
+    const response = await axios.post("/auth/login", credentials);
+    return initAuth(response.data.access_token, response.data.refresh_token);
 }
 
 export async function logout() {

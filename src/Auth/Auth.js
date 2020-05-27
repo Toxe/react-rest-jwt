@@ -1,6 +1,6 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./Auth.css";
-import { login, logout, refresh } from "./API";
+import { login, logout, refresh, initAuth } from "./API";
 import Login from "./Login/Login";
 import AuthInfo from "./AuthInfo";
 import RequestError from "../RequestError";
@@ -9,6 +9,16 @@ import { CurrentUserContext } from "../Context/CurrentUser";
 export default function Auth() {
     const [requestError, setRequestError] = useState(null);
     const { setCurrentUserId } = useContext(CurrentUserContext);
+
+    useEffect(() => {
+        // init auth from already existing tokens
+        const access_token = localStorage.getItem("access_token");
+        const refresh_token = localStorage.getItem("refresh_token");
+
+        try {
+            setCurrentUserId(initAuth(access_token, refresh_token));
+        } catch (error) {}
+    }, [setCurrentUserId]);
 
     const handleLogin = async (credentials) => {
         try {
