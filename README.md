@@ -35,3 +35,9 @@ npm start
 npm run build
 serve -s build
 ```
+
+## Tests
+
+```
+npm test
+```
