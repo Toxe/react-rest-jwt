@@ -10,45 +10,47 @@ export default function UserList() {
     const [users, setUsers] = useState([]);
     const [requestError, setRequestError] = useState(null);
 
-    const refreshUsers = () => {
-        axios
-            .get("/api/users")
-            .then((res) => setUsers(res.data))
-            .catch((error) => setRequestError(<RequestError error={error} handleClose={() => setRequestError(null)} />));
+    const refreshUsers = async () => {
+        try {
+            const res = await axios.get("/api/users");
+            setUsers(res.data);
+        } catch (error) {
+            setRequestError(<RequestError error={error} handleClose={() => setRequestError(null)} />);
+        }
     };
 
     useEffect(() => {
         refreshUsers();
     }, []);
 
-    const handleCreateUser = (user) => {
-        axios
-            .post("/api/users", user)
-            .then((res) => {
-                setUsers([...users, res.data]);
-                setRequestError(null);
-            })
-            .catch((error) => setRequestError(<RequestError error={error} handleClose={() => setRequestError(null)} />));
+    const handleCreateUser = async (user) => {
+        try {
+            const res = await axios.post("/api/users", user);
+            setUsers([...users, res.data]);
+            setRequestError(null);
+        } catch (error) {
+            setRequestError(<RequestError error={error} handleClose={() => setRequestError(null)} />);
+        }
     };
 
-    const handleEditUser = (user) => {
-        axios
-            .put(`/api/users/${user.id}`, user)
-            .then((res) => {
-                setUsers(users.filter((u) => (u.id === user.id ? res.data : u)));
-                setRequestError(null);
-            })
-            .catch((error) => setRequestError(<RequestError error={error} handleClose={() => setRequestError(null)} />));
+    const handleEditUser = async (user) => {
+        try {
+            const res = await axios.put(`/api/users/${user.id}`, user);
+            setUsers(users.filter((u) => (u.id === user.id ? res.data : u)));
+            setRequestError(null);
+        } catch (error) {
+            setRequestError(<RequestError error={error} handleClose={() => setRequestError(null)} />);
+        }
     };
 
-    const handleDeleteUser = (user_id) => {
-        axios
-            .delete(`/api/users/${user_id}`)
-            .then((res) => {
-                setUsers(users.filter((u) => u.id !== user_id));
-                setRequestError(null);
-            })
-            .catch((error) => setRequestError(<RequestError error={error} handleClose={() => setRequestError(null)} />));
+    const handleDeleteUser = async (user_id) => {
+        try {
+            await axios.delete(`/api/users/${user_id}`);
+            setUsers(users.filter((u) => u.id !== user_id));
+            setRequestError(null);
+        } catch (error) {
+            setRequestError(<RequestError error={error} handleClose={() => setRequestError(null)} />);
+        }
     };
 
     return (
