@@ -12,45 +12,47 @@ export default function ShipList() {
     const [shipDetailsID, setShipDetailsID] = useState("");
     const [requestError, setRequestError] = useState(null);
 
-    const refreshShips = () => {
-        axios
-            .get("/api/ships")
-            .then((res) => setShips(res.data))
-            .catch((error) => setRequestError(<RequestError error={error} handleClose={() => setRequestError(null)} />));
+    const refreshShips = async () => {
+        try {
+            const res = await axios.get("/api/ships");
+            setShips(res.data);
+        } catch (error) {
+            setRequestError(<RequestError error={error} handleClose={() => setRequestError(null)} />);
+        }
     };
 
     useEffect(() => {
         refreshShips();
     }, []);
 
-    const handleCreateShip = (ship) => {
-        axios
-            .post("/api/ships", ship)
-            .then((res) => {
-                setShips([...ships, res.data]);
-                setRequestError(null);
-            })
-            .catch((error) => setRequestError(<RequestError error={error} handleClose={() => setRequestError(null)} />));
+    const handleCreateShip = async (ship) => {
+        try {
+            const res = await axios.post("/api/ships", ship);
+            setShips([...ships, res.data]);
+            setRequestError(null);
+        } catch (error) {
+            setRequestError(<RequestError error={error} handleClose={() => setRequestError(null)} />);
+        }
     };
 
-    const handleEditShip = (ship) => {
-        axios
-            .put(`/api/ships/${ship.id}`, ship)
-            .then((res) => {
-                setShips(ships.filter((u) => (u.id === ship.id ? res.data : u)));
-                setRequestError(null);
-            })
-            .catch((error) => setRequestError(<RequestError error={error} handleClose={() => setRequestError(null)} />));
+    const handleEditShip = async (ship) => {
+        try {
+            const res = await axios.put(`/api/ships/${ship.id}`, ship);
+            setShips(ships.filter((u) => (u.id === ship.id ? res.data : u)));
+            setRequestError(null);
+        } catch (error) {
+            setRequestError(<RequestError error={error} handleClose={() => setRequestError(null)} />);
+        }
     };
 
-    const handleDeleteShip = (ship_id) => {
-        axios
-            .delete(`/api/ships/${ship_id}`)
-            .then((res) => {
-                setShips(ships.filter((u) => u.id !== ship_id));
-                setRequestError(null);
-            })
-            .catch((error) => setRequestError(<RequestError error={error} handleClose={() => setRequestError(null)} />));
+    const handleDeleteShip = async (ship_id) => {
+        try {
+            await axios.delete(`/api/ships/${ship_id}`);
+            setShips(ships.filter((u) => u.id !== ship_id));
+            setRequestError(null);
+        } catch (error) {
+            setRequestError(<RequestError error={error} handleClose={() => setRequestError(null)} />);
+        }
     };
 
     return (
