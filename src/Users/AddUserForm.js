@@ -30,8 +30,8 @@ export default function AddUserForm({ handleCreateUser }) {
                 <form onSubmit={handleSubmit}>
                     <div>
                         <div>
-                            Name: <input type="text" size="20" name="name" value={user.name} onChange={onUserChange} />{" "}
-                            Password: <input type="password" size="20" name="password" value={user.password} onChange={onUserChange} />
+                            <label>Name: <input type="text" size="20" name="name" value={user.name} onChange={onUserChange} /></label>{" "}
+                            <label>Password: <input type="password" size="20" name="password" value={user.password} onChange={onUserChange} /></label>
                         </div>
                         <div>
                             <button type="submit" disabled={Object.values(user).some((e) => e === "")}>Create new User</button>
